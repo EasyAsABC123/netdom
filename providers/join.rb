@@ -1,4 +1,4 @@
-#
+  #
 # Author:: Kendrick Martin (kendrick.martin@webtrends.com)
 # Contributor:: Adam Wayne (awayne@waynedigital.com)
 # Cookbook Name:: iis
@@ -41,12 +41,12 @@ action :add do
 end
 
 def load_current_resource
-  @current_resource = Chef::Resource::NETDOMJoin.new(@new_resource.domain)
+  @current_resource = Chef::Resource::NetdomJoin.new(@new_resource.domain)
   @current_resource.ou(@new_resource.ou)
   @current_resource.domain_admin(@new_resource.domain_admin)
   @current_resource.domain_admin_password(@new_resource.domain_admin_password)
   domain_name = node['domain']
-  result = domain_name.downcase == @new_resource.domain.downcase if cmd.stderr.empty?
+  result = domain_name != nil && domain_name.downcase == @new_resource.domain.downcase
   if result
     @current_resource.exists = true
   else

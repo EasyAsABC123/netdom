@@ -25,6 +25,8 @@ attribute :ou, :kind_of => String
 attribute :domain_admin, :kind_of => String
 attribute :domain_admin_password, :kind_of => String
 
+attr_accessor :exists
+
 def initialize(*args)
   super
   @action = :add

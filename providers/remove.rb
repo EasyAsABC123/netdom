@@ -28,7 +28,6 @@ action :remove do
   unless @current_resource.exists
     cmd = "netdom remove #{node['machinename']}"
     cmd << " /domain:#{@new_resource.domain}" if @new_resource.domain
-    cmd << " /ou:#{@new_resource.ou}" if @new_resource.ou
     cmd << " /userd:#{@new_resource.domain_admin}" if @new_resource.domain_admin
     cmd << " /passwordd:#{@new_resource.domain_admin_password}" if @new_resource.domain_admin_password
     Chef::Log.debug(cmd)
@@ -41,12 +40,12 @@ action :remove do
 end
 
 def load_current_resource
-  @current_resource = Chef::Resource::NETDOMRemove.new(@new_resource.domain)
+  @current_resource = Chef::Resource::NetdomRemove.new(@new_resource.domain)
   @current_resource.ou(@new_resource.ou)
   @current_resource.domain_admin(@new_resource.domain_admin)
   @current_resource.domain_admin_password(@new_resource.domain_admin_password)
   domain_name = node['domain']
-  result = domain_name.downcase != @new_resource.domain.downcase if cmd.stderr.empty?
+  result = domain_name != nil && domain_name.downcase != @new_resource.domain.downcase
   if result
     @current_resource.exists = true
   else
