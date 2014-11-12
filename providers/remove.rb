@@ -41,7 +41,6 @@ end
 
 def load_current_resource
   @current_resource = Chef::Resource::NetdomRemove.new(@new_resource.domain)
-  @current_resource.ou(@new_resource.ou)
   @current_resource.domain_admin(@new_resource.domain_admin)
   @current_resource.domain_admin_password(@new_resource.domain_admin_password)
   domain_name = node['domain']
