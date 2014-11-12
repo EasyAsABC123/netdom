@@ -21,7 +21,6 @@
 actions :remove
 
 attribute :domain, :kind_of => String, :name_attribute => true
-attribute :ou, :kind_of => String
 attribute :domain_admin, :kind_of => String
 attribute :domain_admin_password, :kind_of => String
 
